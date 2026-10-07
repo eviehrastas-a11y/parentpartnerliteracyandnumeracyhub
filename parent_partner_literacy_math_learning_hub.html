@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Partner | Literacy & Math Support Guide</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        indigo: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .tab-active {
+            border-bottom: 3px solid #0d9488;
+            color: #0d9488;
+            font-weight: 700;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+        .card-shadow-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- TOP NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo & Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid font-bold text-xl fa-book-open-reader"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-teal-700 via-indigo-700 to-slate-900 bg-clip-text text-transparent">ParentPartner</span>
+                        <span class="hidden md:inline-block text-xs font-semibold px-2 py-0.5 ml-2 bg-teal-100 text-teal-800 rounded-full">Grade 5 & Literacy Focus</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+                    <button onclick="scrollToSection('reading-section')" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-600 hover:bg-slate-100 rounded-lg transition">Reading & Literacy</button>
+                    <button onclick="scrollToSection('word-calling-section')" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-600 hover:bg-slate-100 rounded-lg transition">Word Calling vs Comprehension</button>
+                    <button onclick="scrollToSection('reading-prompts-section')" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-600 hover:bg-slate-100 rounded-lg transition">Prompt Library</button>
+                    <button onclick="scrollToSection('math-section')" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition">Fact Fluency</button>
+                    <button onclick="scrollToSection('math-processes-section')" class="px-3 py-2 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition">7 Math Processes</button>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <button onclick="openModal('toolkit-modal')" class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs sm:text-sm rounded-xl shadow-sm transition hover:shadow-md">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span class="hidden sm:inline">Cheat Sheet Drawer</span>
+                        <span class="sm:hidden">Cheat Sheet</span>
+                    </button>
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1">
+            <button onclick="scrollToSection('reading-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-md">Reading & Literacy</button>
+            <button onclick="scrollToSection('word-calling-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-md">Word Calling vs. Comprehension</button>
+            <button onclick="scrollToSection('reading-prompts-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-md">Reading Prompt Library</button>
+            <button onclick="scrollToSection('math-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-md">Fact Fluency & Math Games</button>
+            <button onclick="scrollToSection('math-processes-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-md">7 Core Math Processes</button>
+            <button onclick="scrollToSection('grade5-focus-section'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 rounded-md">Grade 5 Math Focus</button>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-teal-950 to-indigo-950 text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4">
+                Empowering Parents & Caregivers
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight mb-4">
+                Bridge the Gap Between <span class="bg-gradient-to-r from-teal-300 to-amber-300 bg-clip-text text-transparent">Reading Words</span> & <span class="bg-gradient-to-r from-indigo-300 to-sky-300 bg-clip-text text-transparent">Deep Understanding</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-8">
+                Practical, research-backed tools, conversation starters, and strategies to support your child's literacy journey and Grade 5 mathematical mastery at home.
+            </p>
+
+            <!-- Global Search & Quick Finder -->
+            <div class="max-w-2xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-slate-400 text-lg"></i>
+                    <input type="text" id="global-search" onkeyup="handleGlobalSearch()" placeholder="Search strategies, math concepts, or prompts (e.g. 'inferring', 'fractions', 'multiplication')..." class="w-full pl-12 pr-10 py-3.5 sm:py-4 bg-white/10 backdrop-blur-md text-white placeholder-slate-400 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-teal-400 text-sm sm:text-base transition">
+                    <button id="clear-search-btn" onclick="clearGlobalSearch()" class="hidden absolute right-4 text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-circle-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div id="search-results-dropdown" class="hidden absolute left-0 right-0 top-full mt-2 bg-white text-slate-800 rounded-2xl shadow-2xl z-50 border border-slate-200 text-left max-h-80 overflow-y-auto custom-scrollbar p-2">
+                    <!-- Dynamic Search Items -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- SECTION 1: READING & LITERACY DEVELOPMENT -->
+        <section id="reading-section" class="scroll-mt-24">
+            <!-- Section Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-3 bg-teal-100 text-teal-700 rounded-xl">
+                    <i class="fa-solid fa-book text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Section 1: Reading & Literacy Development</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">Why daily reading matters and how to nurture active thinkers, not just word decoders.</p>
+                </div>
+            </div>
+
+            <!-- 1. The Power of Reading -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow mb-8">
+                <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-brain text-teal-600"></i>
+                    The Power of Reading: Beyond the Classroom
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Reading isn't just an academic skill—it is the foundational engine of all future learning. When children read regularly, they build a vast mental library of vocabulary, sentence structures, and world knowledge that directly impacts their success in science, history, and math word problems.
+                        </p>
+                        <p>
+                            More importantly, reading develops deep **empathy**, strengthens sustained **attention span**, and creates lasting neural connections in the brain.
+                        </p>
+                        <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-xl text-teal-900 font-medium">
+                            <i class="fa-solid fa-quote-left text-teal-400 mr-2"></i>
+                            Reading 20 minutes a day exposes a child to over 1.8 million words per year, compared to just 8,000 words for children reading 1 minute a day!
+                        </div>
+                    </div>
+
+                    <!-- Daily Habits Checklist -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-teal-600"></i>
+                            4 Daily Literacy Habits for Parents
+                        </h4>
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-700">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-teal-100 text-teal-800 font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0 text-xs mt-0.5">1</span>
+                                <div><strong>Read TOGETHER daily:</strong> Even fluent older children benefit from listening to complex books read aloud by parents.</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-teal-100 text-teal-800 font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0 text-xs mt-0.5">2</span>
+                                <div><strong>Model Reading:</strong> Let your children see you reading books, news, or articles rather than just browsing phones.</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-teal-100 text-teal-800 font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0 text-xs mt-0.5">3</span>
+                                <div><strong>Create a Print-Rich Home:</strong> Keep books, magazines, and graphic novels accessible in living areas and bedrooms.</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-teal-100 text-teal-800 font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0 text-xs mt-0.5">4</span>
+                                <div><strong>Talk About What You Read:</strong> Treat books as conversation starters rather than quizzes.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. "Word Calling" vs. True Reading (Comprehension) -->
+            <div id="word-calling-section" class="scroll-mt-24 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
+                            "Word Calling" vs. True Reading (Comprehension)
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-1">Understanding why fast reading doesn't always equal understanding.</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full self-start md:self-auto">
+                        <i class="fa-solid fa-lightbulb"></i> Crucial Concept for Parents
+                    </span>
+                </div>
+
+                <!-- Interactive Comparison Card Toggle -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Word Calling Box -->
+                    <div class="bg-red-50/70 border border-red-200 rounded-2xl p-6 relative overflow-hidden transition-all duration-200 hover:shadow-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold text-red-900 text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-robot text-red-600"></i>
+                                Word Calling (Decoding Only)
+                            </h4>
+                            <span class="text-xs font-bold bg-red-200 text-red-800 px-2.5 py-1 rounded-full">Passive</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 mb-4 leading-relaxed">
+                            The child smoothly pronounces printed words aloud with great accuracy, but their brain is completely disconnected from the <em>meaning</em> of the story.
+                        </p>
+                        <div class="space-y-2 text-xs sm:text-sm">
+                            <div class="flex items-start gap-2 text-red-800">
+                                <i class="fa-solid fa-xmark mt-1 shrink-0"></i>
+                                <span>Focuses only on sounding out individual words.</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-red-800">
+                                <i class="fa-solid fa-xmark mt-1 shrink-0"></i>
+                                <span>Cannot retell what happened on the page after finishing.</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-red-800">
+                                <i class="fa-solid fa-xmark mt-1 shrink-0"></i>
+                                <span>Fails to construct mental pictures while reading.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- True Reading Box -->
+                    <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-6 relative overflow-hidden transition-all duration-200 hover:shadow-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold text-emerald-900 text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-head-side-virus text-emerald-600"></i>
+                                True Reading (Comprehension)
+                            </h4>
+                            <span class="text-xs font-bold bg-emerald-200 text-emerald-800 px-2.5 py-1 rounded-full">Active</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 mb-4 leading-relaxed">
+                            The child makes a "movie in their mind," asks questions, connects themes to their life, and actively constructs meaning continuously.
+                        </p>
+                        <div class="space-y-2 text-xs sm:text-sm">
+                            <div class="flex items-start gap-2 text-emerald-800">
+                                <i class="fa-solid fa-check mt-1 shrink-0"></i>
+                                <span>Monitors understanding & pauses when confused.</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-emerald-800">
+                                <i class="fa-solid fa-check mt-1 shrink-0"></i>
+                                <span>Predicts outcomes and reads between the lines (infers).</span>
+                            </div>
+                            <div class="flex items-start gap-2 text-emerald-800">
+                                <i class="fa-solid fa-check mt-1 shrink-0"></i>
+                                <span>Remembers main ideas and underlying themes.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Red Flags & Actionable Bridge Accordion -->
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-base mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-location text-teal-600"></i>
+                        Red Flags: How to Spot "Word Calling" & How to Help
+                    </h4>
+                    <div class="space-y-3">
+                        <!-- Red Flag 1 -->
+                        <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                            <button onclick="toggleAccordion('rf-1')" class="w-full text-left p-4 font-semibold text-slate-800 text-sm sm:text-base flex justify-between items-center hover:bg-slate-50 transition">
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-500"></i>
+                                    Red Flag #1: "I read all the pages, but I don't remember what happened!"
+                                </span>
+                                <i id="rf-1-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div id="rf-1" class="hidden p-4 pt-0 text-xs sm:text-sm text-slate-600 border-t border-slate-100 bg-slate-50/50">
+                                <strong class="text-slate-800">Actionable Bridge:</strong> Introduce the <em>"3-Sentence Pause Rule"</em>. Have your child place a sticky note or finger every few paragraphs. Stop and ask: "Can you give me a 5-second summary of what just happened?" If they can't, reread that small chunk together.
+                            </div>
+                        </div>
+                        <!-- Red Flag 2 -->
+                        <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                            <button onclick="toggleAccordion('rf-2')" class="w-full text-left p-4 font-semibold text-slate-800 text-sm sm:text-base flex justify-between items-center hover:bg-slate-50 transition">
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-500"></i>
+                                    Red Flag #2: Monotone reading voice without expression or emotion.
+                                </span>
+                                <i id="rf-2-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div id="rf-2" class="hidden p-4 pt-0 text-xs sm:text-sm text-slate-600 border-t border-slate-100 bg-slate-50/50">
+                                <strong class="text-slate-800">Actionable Bridge:</strong> Play <em>"Character Voice Theater"</em>. Read dialogue together and emphasize emotions. If a character is angry, practice reading their lines angrily. Expression (prosody) is a direct bridge to emotional comprehension.
+                            </div>
+                        </div>
+                        <!-- Red Flag 3 -->
+                        <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                            <button onclick="toggleAccordion('rf-3')" class="w-full text-left p-4 font-semibold text-slate-800 text-sm sm:text-base flex justify-between items-center hover:bg-slate-50 transition">
+                                <span class="flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-500"></i>
+                                    Red Flag #3: Reads straight over funny or confusing moments without reacting.
+                                </span>
+                                <i id="rf-3-icon" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div id="rf-3" class="hidden p-4 pt-0 text-xs sm:text-sm text-slate-600 border-t border-slate-100 bg-slate-50/50">
+                                <strong class="text-slate-800">Actionable Bridge:</strong> Model <em>"Thinking Aloud"</em>. Interrupt your own reading to say: "Wait, that doesn't make sense! Why did he do that?" Show them that good readers constantly check if the story makes sense.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. School Reading Comprehension Strategies -->
+            <div id="reading-strategies-section" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow mb-8">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-teal-600"></i>
+                        7 Primary Reading Comprehension Strategies Taught in Schools
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-1">Click each strategy below to see how teachers introduce it in the classroom and how you can support it at home.</p>
+                </div>
+
+                <!-- Strategy Tab Buttons -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-3 custom-scrollbar border-b border-slate-200 mb-6" id="strategy-tabs">
+                    <!-- Dynamic Buttons Generated via JS -->
+                </div>
+
+                <!-- Tab Content Card -->
+                <div id="strategy-tab-content" class="bg-teal-50/50 border border-teal-100 rounded-2xl p-6 transition-all duration-300">
+                    <!-- Dynamic Strategy Details populated by JS -->
+                </div>
+            </div>
+
+            <!-- 4. Parent Reading Prompt Library (Interactive & Searchable) -->
+            <div id="reading-prompts-section" class="scroll-mt-24 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-teal-600"></i>
+                            Interactive Reading Prompt Library
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-1">Filter prompts by comprehension strategy or reading phase (Before, During, After reading).</p>
+                    </div>
+
+                    <!-- Search & Filter Controls -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <select id="prompt-strategy-filter" onchange="filterPrompts()" class="px-3 py-2 bg-slate-100 text-slate-700 text-xs sm:text-sm font-medium rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <option value="all">All Strategies</option>
+                            <option value="predicting">Predicting</option>
+                            <option value="visualizing">Visualizing</option>
+                            <option value="connecting">Making Connections</option>
+                            <option value="questioning">Questioning</option>
+                            <option value="inferring">Inferring</option>
+                            <option value="summarizing">Summarizing</option>
+                            <option value="importance">Determining Importance</option>
+                        </select>
+
+                        <select id="prompt-phase-filter" onchange="filterPrompts()" class="px-3 py-2 bg-slate-100 text-slate-700 text-xs sm:text-sm font-medium rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <option value="all">All Reading Phases</option>
+                            <option value="Before">Before Reading</option>
+                            <option value="During">During Reading</option>
+                            <option value="After">After Reading</option>
+                        </select>
+
+                        <button onclick="showBookmarksOnly()" id="bookmarks-btn" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-medium rounded-xl border border-slate-200 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-bookmark text-amber-500"></i>
+                            <span>Favorites</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prompt Cards Container -->
+                <div id="prompts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamic Prompts populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ELEMENTARY & GRADE 5 MATHEMATICS -->
+        <section id="math-section" class="scroll-mt-24">
+            <!-- Section Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-3 bg-indigo-100 text-indigo-700 rounded-xl">
+                    <i class="fa-solid fa-calculator text-2xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Section 2: Elementary & Grade 5 Mathematics</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">Unlocking numeracy through fact fluency, 7 core mathematical processes, and conceptual depth.</p>
+                </div>
+            </div>
+
+            <!-- 1. Fact Fluency Matters -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow mb-8">
+                <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-500"></i>
+                    Why Math Fact Fluency Matters (Addition, Subtraction, Multiplication, Division)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+                    <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                        <p>
+                            <strong>What is Fact Fluency?</strong> It is the ability to recall basic math facts (e.g., 7 × 8 = 56, 14 - 6 = 8) accurately, efficiently, and effortlessly without needing to count on fingers.
+                        </p>
+                        <p>
+                            <strong>Cognitive Load Theory Explained:</strong> Your child's working memory is like a small workbench. If they spend 80% of their working memory trying to calculate 6 × 7 while solving a multi-step Grade 5 algebra or fraction problem, there is no mental room left for strategic thinking!
+                        </p>
+                        <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 rounded-r-xl text-indigo-950 font-medium text-xs sm:text-sm">
+                            <i class="fa-solid fa-lightbulb text-indigo-600 mr-2"></i>
+                            Automaticity frees up working memory so students can focus on multi-step reasoning, real-world application, and complex problem solving.
+                        </div>
+                    </div>
+
+                    <!-- Games & Low-Stress Tips Box -->
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <h4 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad text-indigo-600"></i>
+                            Fun Games & Tips (No Stressful Timed Drills!)
+                        </h4>
+                        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
+                            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                <span class="font-bold text-indigo-700">1. Math War (Card Game):</span>
+                                <p class="mt-0.5 text-slate-600">Split a deck of cards. Each player flips 2 cards. Multiply or add them together—highest product wins the pile!</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                <span class="font-bold text-indigo-700">2. Target Number / Make 24:</span>
+                                <p class="mt-0.5 text-slate-600">Roll 4 dice and use any combination of +, -, ×, ÷ to reach the target number 24.</p>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                <span class="font-bold text-indigo-700">3. Decomposition & Strategies:</span>
+                                <p class="mt-0.5 text-slate-600">Teach tricks: For 7 × 8, think (5 × 8) + (2 × 8) = 40 + 16 = 56.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Quick-Practice Fact Fluency Widget -->
+                <div class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white p-6 sm:p-8 rounded-2xl border border-indigo-700 shadow-lg">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+                        <div>
+                            <span class="text-xs font-bold bg-amber-400 text-slate-900 px-3 py-1 rounded-full uppercase tracking-wider">Interactive Widget</span>
+                            <h4 class="text-xl font-bold mt-2">Family Math Fact Challenge Widget</h4>
+                            <p class="text-indigo-200 text-xs sm:text-sm">Practice facts together in a friendly, low-pressure format!</p>
+                        </div>
+                        <!-- Operations Selector -->
+                        <div class="flex items-center gap-1 bg-white/10 p-1.5 rounded-xl border border-white/10">
+                            <button onclick="setMathOperation('+')" id="op-add" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white">+</button>
+                            <button onclick="setMathOperation('-')" id="op-sub" class="px-3 py-1.5 rounded-lg text-xs font-bold transition hover:bg-white/10 text-white">-</button>
+                            <button onclick="setMathOperation('×')" id="op-mul" class="px-3 py-1.5 rounded-lg text-xs font-bold transition hover:bg-white/10 text-white">×</button>
+                            <button onclick="setMathOperation('÷')" id="op-div" class="px-3 py-1.5 rounded-lg text-xs font-bold transition hover:bg-white/10 text-white">÷</button>
+                        </div>
+                    </div>
+
+                    <!-- Game Display Box -->
+                    <div class="max-w-md mx-auto text-center space-y-6 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+                        <div id="math-problem" class="text-4xl sm:text-5xl font-black tracking-wider text-amber-300">
+                            7 × 8 = ?
+                        </div>
+
+                        <!-- Tip Box for decomposition -->
+                        <div id="math-strategy-tip" class="text-xs text-indigo-200 bg-white/10 p-3 rounded-xl border border-white/10 italic">
+                            Strategy Tip: Think (5 × 8) + (2 × 8) = 40 + 16 = 56!
+                        </div>
+
+                        <div class="flex items-center justify-center gap-3">
+                            <input type="number" id="math-answer-input" placeholder="Your answer" onkeyup="checkMathAnswerOnEnter(event)" class="w-32 px-4 py-2.5 text-center text-xl font-bold bg-white text-slate-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <button onclick="checkMathAnswer()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl transition shadow-md">
+                                Submit
+                            </button>
+                        </div>
+
+                        <div id="math-feedback" class="min-h-[24px] text-sm font-semibold">
+                            <!-- Feedback message -->
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs text-indigo-200 pt-2 border-t border-white/10">
+                            <span>Score: <strong id="math-score" class="text-white text-sm">0</strong></span>
+                            <button onclick="generateMathProblem()" class="text-indigo-300 hover:text-white underline">Skip Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. The 7 Core Mathematical Processes -->
+            <div id="math-processes-section" class="scroll-mt-24 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow mb-8">
+                <div class="mb-6">
+                    <span class="text-xs font-bold px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full">Numeracy Framework</span>
+                    <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-2 flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-indigo-600"></i>
+                        The 7 Core Mathematical Processes
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-1">To foster deep understanding and lifelong learning, our mathematics program integrates these seven interconnected processes in every lesson.</p>
+                </div>
+
+                <!-- 7 Process Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Process 1: Communication -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">1. Communication</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Expressing mathematical ideas in various ways—verbally, in writing, pictorially, symbolically, and through concrete models. Explaining thinking and justifying solutions.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Ask "Can you draw a picture or diagram showing how you solved this fraction question?"
+                        </div>
+                    </div>
+
+                    <!-- Process 2: Connections -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-link"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">2. Connections</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Linking mathematical concepts to each other (how fractions relate to decimals and percents), to other subjects, and to daily real-world situations.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Point out discount sales at stores: "30% off is the same as 3/10 off the total price!"
+                        </div>
+                    </div>
+
+                    <!-- Process 3: Mental Math & Estimation -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">3. Mental Math & Estimation</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Calculating mentally without paper or external tools to build number sense and efficiency. Estimating approximate values to judge answer reasonableness.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> At grocery checkout: "The total is $18.75 and $4.20. Is $30 a reasonable estimate or too high?"
+                        </div>
+                    </div>
+
+                    <!-- Process 4: Problem Solving -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-puzzle-piece"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">4. Problem Solving</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                The central engine of math learning. Developing and applying skills to solve non-routine, real-world problems through analysis, strategy, and reflection.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Encourage multiple pathways: "That strategy didn't work. What other way could we try?"
+                        </div>
+                    </div>
+
+                    <!-- Process 5: Reasoning -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-gears"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">5. Reasoning</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Logical thinking, making conjectures, justifying solutions, and providing evidence. Thinking critically and generalizing patterns from math examples.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Always ask: "How do you know that answer is correct? Convince me!"
+                        </div>
+                    </div>
+
+                    <!-- Process 6: Technology -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">6. Technology</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Utilizing tools (calculators, digital simulators, software) to explore concepts, organize data, and visualize dynamic mathematical relationships.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Using interactive fraction simulator games or spreadsheet charts to explore data.
+                        </div>
+                    </div>
+
+                    <!-- Process 7: Visualization (Full row on small/medium if needed) -->
+                    <div class="bg-slate-50 hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-200 rounded-2xl p-6 transition-all duration-200 card-shadow-hover flex flex-col justify-between md:col-span-2 lg:col-span-1">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold mb-4 shadow-sm">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg mb-2">7. Visualization</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                                Creating mental images or physical representations (manipulatives, diagrams, graphs) to "see" and physically manipulate abstract concepts.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs text-indigo-900">
+                            <strong>Parent Example:</strong> Cut pizza or LEGO bricks into fraction groups so your child physically sees 3/4 vs 6/8.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. Beyond Skill Mastery: Grade 5 Focus -->
+            <div id="grade5-focus-section" class="scroll-mt-24 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 card-shadow">
+                <div class="mb-6">
+                    <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">Grade 5 Curriculum Focus</span>
+                    <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-2 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                        Beyond Skill Mastery: The "How" vs. The "Why"
+                    </h3>
+                    <p class="text-slate-600 text-sm mt-1">In Grade 5, math goes beyond simply memorizing steps. Students learn to justify their reasoning and apply math to real-world scenarios.</p>
+                </div>
+
+                <!-- Interactive Comparison Tool: Traditional vs Modern Conceptual Thinking -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                        <h4 class="font-bold text-slate-800 text-base">Sample Problem Comparison Tool</h4>
+                        <span class="text-xs text-slate-500">Toggle between Grade 5 approaches</span>
+                    </div>
+
+                    <!-- Problem Selectors -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Traditional Column -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-rose-600 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-file-pen"></i>
+                                Traditional Approach (The "How")
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 font-mono bg-slate-100 p-3 rounded-lg mb-3">
+                                "Calculate: 3/4 + 2/3 = ?"
+                            </p>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                <strong>Focus:</strong> Memorizing the algorithm (finding common denominators, converting numerators, adding). The student gets the answer 17/12, but may have no idea what it actually represents visually.
+                            </p>
+                        </div>
+
+                        <!-- Grade 5 Modern Conceptual Column -->
+                        <div class="bg-emerald-50/60 p-5 rounded-xl border border-emerald-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm mb-3">
+                                <i class="fa-solid fa-brain"></i>
+                                Grade 5 Modern Focus (The "WHY")
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-800 font-medium bg-emerald-100/70 p-3 rounded-lg mb-3">
+                                "Maya ate 3/4 of a pizza and Sam ate 2/3 of an identical pizza. Is there enough left over for Leo to have a half slice? Explain and draw your reasoning."
+                            </p>
+                            <p class="text-xs text-slate-700 leading-relaxed">
+                                <strong>Focus:</strong> Real-world estimation, communication, and visual representation. The student uses estimation to see that 3/4 + 2/3 is greater than 1 whole pizza (17/12 = 1 and 5/12), so only 7/12 is left, which is slightly more than half!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CHEAT SHEET DRAWER MODAL -->
+    <div id="toolkit-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-slate-100">
+            <!-- Modal Header -->
+            <div class="p-6 bg-gradient-to-r from-teal-700 to-indigo-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-lightbulb text-amber-300 text-2xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold">Parent Cheat Sheet Drawer</h3>
+                        <p class="text-xs text-teal-100">Bedtime Reading & Math Conversation Starters</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('toolkit-modal')" class="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-6 text-slate-700 text-sm custom-scrollbar">
+                
+                <!-- Section A: Bedtime Reading Starters -->
+                <div>
+                    <h4 class="font-bold text-teal-800 text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i>
+                        5 Quick Bedtime Reading Prompts
+                    </h4>
+                    <ul class="space-y-2 bg-teal-50 p-4 rounded-xl border border-teal-100 text-xs sm:text-sm">
+                        <li>1. "If you could step into this story right now, what advice would you give the main character?"</li>
+                        <li>2. "What was the most surprising decision a character made today?"</li>
+                        <li>3. "Can you pause for a second and describe the picture you're seeing in your head?"</li>
+                        <li>4. "Why do you think the author chose to end the chapter right here?"</li>
+                        <li>5. "How is this story similar to or different from what happened to you at school today?"</li>
+                    </ul>
+                </div>
+
+                <!-- Section B: Daily Math Conversation Starters -->
+                <div>
+                    <h4 class="font-bold text-indigo-800 text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i>
+                        5 Everyday Math Prompts (Car Ride / Dinner Table)
+                    </h4>
+                    <ul class="space-y-2 bg-indigo-50 p-4 rounded-xl border border-indigo-100 text-xs sm:text-sm">
+                        <li>1. "How did you solve that in your head? Is there another way we could try?"</li>
+                        <li>2. "Let's estimate the total cost of these 3 grocery items before the cashier rings them up!"</li>
+                        <li>3. "Where do you see fractions or symmetry right now in this room?"</li>
+                        <li>4. "Does that answer make sense to you, or is it way too high / low?"</li>
+                        <li>5. "Can you explain the rules of this math game to me like I'm a beginner?"</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-end gap-3">
+                <button onclick="copyCheatSheet()" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Copy All Prompts</span>
+                </button>
+                <button onclick="closeModal('toolkit-modal')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-xs sm:text-sm rounded-xl transition">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+            <div>
+                <p class="font-bold text-slate-200 text-sm">Parent Partner Learning Hub</p>
+                <p class="mt-1">Supporting Grade 5 Numeracy & Lifelong Reading Comprehension.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="scrollToSection('reading-section')" class="hover:text-white transition">Reading</button>
+                <button onclick="scrollToSection('math-section')" class="hover:text-white transition">Math</button>
+                <button onclick="openModal('toolkit-modal')" class="hover:text-amber-400 transition">Cheat Sheet</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Structures
+        const comprehensionStrategies = [
+            {
+                id: 'predicting',
+                title: 'Predicting',
+                icon: 'fa-crystal-ball',
+                shortDesc: 'Anticipating what will happen next based on clues and prior knowledge.',
+                classroom: 'Teachers guide students to make educated guesses using text features (cover, titles, headings) and background knowledge before and during reading.',
+                homeTip: 'Before turning the page, ask: "Based on what we know about this character, what do you predict they will do next?"',
+                promptExample: '"What clues in the illustration make you think that?"'
+            },
+            {
+                id: 'visualizing',
+                title: 'Visualizing',
+                icon: 'fa-image',
+                shortDesc: 'Creating sensory mental movies in the brain while reading.',
+                classroom: 'Students practice visualizing by drawing scenes based strictly on descriptive text, engaging senses (sight, sound, smell, feeling).',
+                homeTip: 'Pause during highly descriptive passages and say: "Close your eyes. Tell me what your mind\'s movie camera is seeing right now!"',
+                promptExample: '"If you were in this room with the character, what sounds or smells would be around you?"'
+            },
+            {
+                id: 'connecting',
+                title: 'Making Connections',
+                icon: 'fa-people-arrows',
+                shortDesc: 'Linking text to personal experiences, other books, or world events.',
+                classroom: 'Taught through 3 categories: Text-to-Self (personal life), Text-to-Text (other books/movies), and Text-to-World (global events/history).',
+                homeTip: 'Share your own connections while reading aloud: "This reminds me of when we got stuck in the rain on our camping trip!"',
+                promptExample: '"Has anything like this ever happened to you or anyone you know?"'
+            },
+            {
+                id: 'questioning',
+                title: 'Questioning',
+                icon: 'fa-circle-question',
+                shortDesc: 'Asking questions before, during, and after reading to drive curiosity.',
+                classroom: 'Teachers encourage students to wonder about plot gaps, character motivations, and word meanings rather than just answering teacher questions.',
+                homeTip: 'Keep sticky notes nearby. Have your child write down questions they have as they read to research or discuss later.',
+                promptExample: '"What is one question you have right now that you hope the author answers soon?"'
+            },
+            {
+                id: 'inferring',
+                title: 'Inferring & Reading Between Lines',
+                icon: 'fa-user-secret',
+                shortDesc: 'Combining text clues with background knowledge to figure out unstated facts.',
+                classroom: 'Teachers use the formula: Text Clues + My Schema (Prior Knowledge) = Inference. Helps kids realize authors don\'t tell you everything explicitly.',
+                homeTip: 'Point out character expressions and subtle cues: "The author didn\'t say he was sad, but how do we know he was feeling down?"',
+                promptExample: '"Why do you think the character acted that way, even though they didn\'t say it out loud?"'
+            },
+            {
+                id: 'summarizing',
+                title: 'Summarizing & Synthesizing',
+                icon: 'fa-list-check',
+                shortDesc: 'Restating main ideas in one\'s own words and updating overall understanding.',
+                classroom: 'Students use frameworks like "Somebody Wanted But So Then" to condense whole chapters into concise key events.',
+                homeTip: 'At the end of a chapter, ask for a "15-second movie trailer summary" of what just occurred.',
+                promptExample: '"Who was the main character, what was their big goal, and what problem stopped them?"'
+            },
+            {
+                id: 'importance',
+                title: 'Determining Importance',
+                icon: 'fa-filter',
+                shortDesc: 'Sorting essential main ideas from interesting but minor details.',
+                classroom: 'Crucial for non-fiction. Teachers show students how to use headings, bolded text, diagrams, and summary boxes to find big takeaways.',
+                homeTip: 'When reading non-fiction books, ask: "If you could only share ONE important fact from this page with a friend, which one would it be?"',
+                promptExample: '"Is that detail just an interesting fact, or is it crucial to solving the whole mystery?"'
+            }
+        ];
+
+        const promptLibrary = [
+            {
+                id: 1,
+                strategy: 'predicting',
+                phase: 'Before',
+                text: 'Looking at the cover title and illustration, what do you think this story will be about?',
+                category: 'Predicting'
+            },
+            {
+                id: 2,
+                strategy: 'predicting',
+                phase: 'During',
+                text: 'Now that the main problem has happened, what do you predict the main character will do next?',
+                category: 'Predicting'
+            },
+            {
+                id: 3,
+                strategy: 'visualizing',
+                phase: 'During',
+                text: 'Close your eyes. What does this setting look, sound, and feel like based on the author\'s words?',
+                category: 'Visualizing'
+            },
+            {
+                id: 4,
+                strategy: 'connecting',
+                phase: 'During',
+                text: 'How does this character\'s situation remind you of something in your own life? (Text-to-Self)',
+                category: 'Making Connections'
+            },
+            {
+                id: 5,
+                strategy: 'connecting',
+                phase: 'After',
+                text: 'Does this book remind you of any other story or movie we\'ve experienced together? How? (Text-to-Text)',
+                category: 'Making Connections'
+            },
+            {
+                id: 6,
+                strategy: 'questioning',
+                phase: 'Before',
+                text: 'What are 2 things you are wondering about this topic before we start reading?',
+                category: 'Questioning'
+            },
+            {
+                id: 7,
+                strategy: 'inferring',
+                phase: 'During',
+                text: 'The author didn\'t tell us directly, but how do you think the character feels right now based on their actions?',
+                category: 'Inferring'
+            },
+            {
+                id: 8,
+                strategy: 'summarizing',
+                phase: 'After',
+                text: 'Can you summarize the main plot using: Somebody (Who), Wanted (Goal), But (Problem), So (Solution), Then (Ending)?',
+                category: 'Summarizing'
+            },
+            {
+                id: 9,
+                strategy: 'importance',
+                phase: 'During',
+                text: 'Which sentence on this page gives us the main idea, and which sentences are just fun bonus facts?',
+                category: 'Determining Importance'
+            }
+        ];
+
+        // State Management
+        let activeStrategyIndex = 0;
+        let bookmarkedPromptIds = JSON.parse(localStorage.getItem('parent_partner_bookmarks') || '[]');
+        let currentMathOp = '×';
+        let currentMathProblem = { a: 7, b: 8, answer: 56, strategy: 'Think (5 × 8) + (2 × 8) = 40 + 16 = 56!' };
+        let mathScore = 0;
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStrategyTabs();
+            renderStrategyContent(0);
+            renderPrompts();
+            generateMathProblem();
+        });
+
+        // Strategy Rendering
+        function renderStrategyTabs() {
+            const container = document.getElementById('strategy-tabs');
+            container.innerHTML = comprehensionStrategies.map((strat, index) => `
+                <button onclick="switchStrategyTab(${index})" class="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl whitespace-nowrap transition flex items-center gap-2 ${index === activeStrategyIndex ? 'bg-teal-600 text-white shadow-md' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}">
+                    <i class="fa-solid ${strat.icon}"></i>
+                    ${strat.title}
+                </button>
+            `).join('');
+        }
+
+        function switchStrategyTab(index) {
+            activeStrategyIndex = index;
+            renderStrategyTabs();
+            renderStrategyContent(index);
+        }
+
+        function renderStrategyContent(index) {
+            const strat = comprehensionStrategies[index];
+            const container = document.getElementById('strategy-tab-content');
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b border-teal-200/60 pb-3">
+                        <h4 class="text-lg font-bold text-teal-900 flex items-center gap-2">
+                            <i class="fa-solid ${strat.icon} text-teal-600"></i>
+                            ${strat.title} Strategy
+                        </h4>
+                        <span class="text-xs bg-teal-200 text-teal-900 px-2.5 py-1 rounded-full font-semibold">Strategy ${index + 1} of 7</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 font-medium">${strat.shortDesc}</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-white p-4 rounded-xl border border-teal-100 shadow-sm">
+                            <h5 class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-chalkboard-user"></i> How Teachers Teach It
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">${strat.classroom}</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-teal-100 shadow-sm">
+                            <h5 class="text-xs font-bold text-amber-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-house-chimney"></i> How Parents Can Support at Home
+                            </h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">${strat.homeTip}</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-900 flex items-start gap-2">
+                        <i class="fa-solid fa-quote-left text-amber-500 mt-0.5"></i>
+                        <div>
+                            <strong>Sample Conversation Starter:</strong> ${strat.promptExample}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Prompt Library
+        function renderPrompts(showBookmarksOnlyFlag = false) {
+            const container = document.getElementById('prompts-container');
+            const stratFilter = document.getElementById('prompt-strategy-filter').value;
+            const phaseFilter = document.getElementById('prompt-phase-filter').value;
+
+            let filtered = promptLibrary.filter(p => {
+                const matchStrat = stratFilter === 'all' || p.strategy === stratFilter;
+                const matchPhase = phaseFilter === 'all' || p.phase === phaseFilter;
+                const matchBookmark = !showBookmarksOnlyFlag || bookmarkedPromptIds.includes(p.id);
+                return matchStrat && matchPhase && matchBookmark;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-10 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <i class="fa-regular fa-folder-open text-3xl text-slate-400 mb-2"></i>
+                        <p class="text-sm font-semibold text-slate-600">No prompts match your current filter settings.</p>
+                        <button onclick="resetPromptFilters()" class="mt-3 text-xs text-teal-600 font-bold hover:underline">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(p => {
+                const isBookmarked = bookmarkedPromptIds.includes(p.id);
+                return `
+                    <div class="bg-slate-50 border border-slate-200 hover:border-teal-300 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 card-shadow-hover">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-xs font-bold px-2 py-0.5 bg-teal-100 text-teal-800 rounded-md">${p.category}</span>
+                                <span class="text-xs font-semibold px-2 py-0.5 bg-slate-200 text-slate-700 rounded-md">${p.phase} Reading</span>
+                            </div>
+                            <p class="text-xs sm:text-sm font-medium text-slate-800 leading-relaxed mb-4">"${p.text}"</p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-slate-200 pt-3 text-xs">
+                            <button onclick="toggleBookmark(${p.id})" class="text-slate-400 hover:text-amber-500 font-medium transition flex items-center gap-1">
+                                <i class="${isBookmarked ? 'fa-solid text-amber-500' : 'fa-regular'} fa-bookmark"></i>
+                                <span>${isBookmarked ? 'Saved' : 'Save'}</span>
+                            </button>
+                            <button onclick="copyPromptText('${p.text.replace(/'/g, "\\'")}')" class="text-teal-600 hover:text-teal-800 font-semibold transition flex items-center gap-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>Copy Prompt</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterPrompts() {
+            renderPrompts(false);
+        }
+
+        function showBookmarksOnly() {
+            const btn = document.getElementById('bookmarks-btn');
+            const isActive = btn.classList.contains('bg-amber-100');
+            if (isActive) {
+                btn.classList.remove('bg-amber-100', 'text-amber-900', 'border-amber-300');
+                renderPrompts(false);
+            } else {
+                btn.classList.add('bg-amber-100', 'text-amber-900', 'border-amber-300');
+                renderPrompts(true);
+            }
+        }
+
+        function resetPromptFilters() {
+            document.getElementById('prompt-strategy-filter').value = 'all';
+            document.getElementById('prompt-phase-filter').value = 'all';
+            document.getElementById('bookmarks-btn').classList.remove('bg-amber-100', 'text-amber-900');
+            renderPrompts(false);
+        }
+
+        function toggleBookmark(id) {
+            if (bookmarkedPromptIds.includes(id)) {
+                bookmarkedPromptIds = bookmarkedPromptIds.filter(bId => bId !== id);
+            } else {
+                bookmarkedPromptIds.push(id);
+            }
+            localStorage.setItem('parent_partner_bookmarks', JSON.stringify(bookmarkedPromptIds));
+            renderPrompts();
+        }
+
+        function copyPromptText(text) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('Prompt copied to clipboard!');
+        }
+
+        // Interactive Math Widget Logic
+        function setMathOperation(op) {
+            currentMathOp = op;
+            ['add', 'sub', 'mul', 'div'].forEach(id => {
+                const btn = document.getElementById(`op-${id}`);
+                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition hover:bg-white/10 text-white';
+            });
+            if (op === '+') document.getElementById('op-add').className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white';
+            if (op === '-') document.getElementById('op-sub').className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white';
+            if (op === '×') document.getElementById('op-mul').className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white';
+            if (op === '÷') document.getElementById('op-div').className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-indigo-600 text-white';
+            
+            generateMathProblem();
+        }
+
+        function generateMathProblem() {
+            let a, b, answer, strategy;
+            document.getElementById('math-feedback').innerText = '';
+            document.getElementById('math-answer-input').value = '';
+
+            if (currentMathOp === '+') {
+                a = Math.floor(Math.random() * 40) + 15;
+                b = Math.floor(Math.random() * 40) + 15;
+                answer = a + b;
+                strategy = `Strategy Tip: Make a benchmark ten! ${a} + ${b} = (${a} + ${10 - (a % 10)}) + ${b - (10 - (a % 10))}`;
+            } else if (currentMathOp === '-') {
+                b = Math.floor(Math.random() * 30) + 10;
+                a = b + Math.floor(Math.random() * 40) + 10;
+                answer = a - b;
+                strategy = `Strategy Tip: Think addition! What do you add to ${b} to reach ${a}?`;
+            } else if (currentMathOp === '×') {
+                a = Math.floor(Math.random() * 10) + 3;
+                b = Math.floor(Math.random() * 10) + 3;
+                answer = a * b;
+                strategy = `Strategy Tip: Decompose! ${a} × ${b} = (${a - 2} × ${b}) + (2 × ${b})`;
+            } else if (currentMathOp === '÷') {
+                b = Math.floor(Math.random() * 9) + 2;
+                answer = Math.floor(Math.random() * 10) + 2;
+                a = b * answer;
+                strategy = `Strategy Tip: Division is inverse multiplication! ? × ${b} = ${a}`;
+            }
+
+            currentMathProblem = { a, b, answer, strategy };
+            document.getElementById('math-problem').innerText = `${a} ${currentMathOp} ${b} = ?`;
+            document.getElementById('math-strategy-tip').innerText = strategy;
+        }
+
+        function checkMathAnswerOnEnter(e) {
+            if (e.key === 'Enter') {
+                checkMathAnswer();
+            }
+        }
+
+        function checkMathAnswer() {
+            const inputVal = parseInt(document.getElementById('math-answer-input').value);
+            const feedback = document.getElementById('math-feedback');
+
+            if (isNaN(inputVal)) {
+                feedback.innerHTML = `<span class="text-amber-300">Please enter a valid number!</span>`;
+                return;
+            }
+
+            if (inputVal === currentMathProblem.answer) {
+                mathScore += 10;
+                document.getElementById('math-score').innerText = mathScore;
+                feedback.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check"></i> Great job! Spot on!</span>`;
+                setTimeout(() => {
+                    generateMathProblem();
+                }, 1200);
+            } else {
+                feedback.innerHTML = `<span class="text-rose-300"><i class="fa-solid fa-circle-xmark"></i> Not quite. Try again!</span>`;
+            }
+        }
+
+        // Global Search Functionality
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase().trim();
+            const dropdown = document.getElementById('search-results-dropdown');
+            const clearBtn = document.getElementById('clear-search-btn');
+
+            if (!query) {
+                dropdown.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                return;
+            }
+
+            clearBtn.classList.remove('hidden');
+
+            const results = [];
+
+            // Search strategies
+            comprehensionStrategies.forEach(s => {
+                if (s.title.toLowerCase().includes(query) || s.shortDesc.toLowerCase().includes(query)) {
+                    results.push({
+                        title: `Reading Strategy: ${s.title}`,
+                        desc: s.shortDesc,
+                        action: () => {
+                            scrollToSection('reading-strategies-section');
+                            switchStrategyTab(comprehensionStrategies.findIndex(x => x.id === s.id));
+                        }
+                    });
+                }
+            });
+
+            // Search prompts
+            promptLibrary.forEach(p => {
+                if (p.text.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)) {
+                    results.push({
+                        title: `Prompt (${p.category}): "${p.text.substring(0, 45)}..."`,
+                        desc: `Phase: ${p.phase} reading`,
+                        action: () => {
+                            scrollToSection('reading-prompts-section');
+                        }
+                    });
+                }
+            });
+
+            // Search Math concepts
+            if ('fractions decimals multiplication division fluency processes reasoning'.includes(query)) {
+                results.push({
+                    title: 'Grade 5 Math Focus & Processes',
+                    desc: '7 core mathematical processes and concept vs procedural fluency.',
+                    action: () => scrollToSection('math-processes-section')
+                });
+            }
+
+            if (results.length === 0) {
+                dropdown.innerHTML = `<div class="p-4 text-xs text-slate-500 text-center">No matching topics or prompts found for "${query}"</div>`;
+            } else {
+                dropdown.innerHTML = results.map((r, i) => `
+                    <div onclick="executeSearchResult(${i})" class="p-3 hover:bg-slate-100 rounded-xl cursor-pointer transition border-b border-slate-100 last:border-none">
+                        <div class="text-xs font-bold text-teal-800">${r.title}</div>
+                        <div class="text-xs text-slate-500 truncate">${r.desc}</div>
+                    </div>
+                `).join('');
+                window.searchResultsCache = results;
+            }
+
+            dropdown.classList.remove('hidden');
+        }
+
+        function executeSearchResult(index) {
+            if (window.searchResultsCache && window.searchResultsCache[index]) {
+                window.searchResultsCache[index].action();
+                document.getElementById('search-results-dropdown').classList.add('hidden');
+            }
+        }
+
+        function clearGlobalSearch() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('search-results-dropdown').classList.add('hidden');
+            document.getElementById('clear-search-btn').classList.add('hidden');
+        }
+
+        // Accordion Toggle Utility
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(`${id}-icon`);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // UI Helpers & Navigation
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function copyCheatSheet() {
+            const text = `
+PARENT CHEAT SHEET: BEDTIME READING & MATH STARTERS
+
+5 Reading Prompts:
+1. "If you could step into this story right now, what advice would you give the main character?"
+2. "What was the most surprising decision a character made today?"
+3. "Can you pause for a second and describe the picture you're seeing in your head?"
+4. "Why do you think the author chose to end the chapter right here?"
+5. "How is this story similar to or different from what happened to you at school today?"
+
+5 Daily Math Prompts:
+1. "How did you solve that in your head? Is there another way we could try?"
+2. "Let's estimate the total cost of these 3 grocery items before the cashier rings them up!"
+3. "Where do you see fractions or symmetry right now in this room?"
+4. "Does that answer make sense to you, or is it way too high / low?"
+5. "Can you explain the rules of this math game to me like I'm a beginner?"
+            `;
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('Cheat Sheet copied to clipboard!');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white text-xs sm:text-sm font-semibold px-4 py-3 rounded-2xl shadow-xl z-50 flex items-center gap-2 border border-slate-700 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
